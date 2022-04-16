@@ -6,7 +6,7 @@ const client = new Discord.Client();
 
 // Module imports
 require('dotenv').config();
-const { EventResponse } = require('./modules/onMessage')
+const { EventResponse } = require('./modules/commands')
 
 // Define Variable
 const { customMessage } = require('./modules/customMessage')
@@ -15,7 +15,15 @@ const welcome = client.channels.cache.get('764855446938189836')
 // <=========> Status Message <=========> //
 
 client.once('ready', () => {
-    console.log("Bot is online!")
+    console.log("Bot is online!");
+    // client.user?.setPresence({
+    //     status: "online",  // You can show online, idle... Do not disturb is dnd
+    //     activities: [{
+    //         name: "!help",
+    //         type: "PLAYING"  // The message shown
+    //     }]
+    // });
+    client.user.setActivity("+help", {type: "WATCHING"});
 })
 
 // <=========> Listen for messages <=========> //

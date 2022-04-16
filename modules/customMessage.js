@@ -37,12 +37,15 @@ const customMessage = {
         return new Discord.MessageEmbed()
         .setColor(defaultColor)
         .setTitle('chocolatecookie command list')
-        .setAuthor(defaultAuthor)
+        .setAuthor('\u200B')
         .addFields(
-            { name: '\u200B', value: '+help', inline: true },
-            { name: '\u200B', value: '=>', inline: true },
-            { name: '\u200B', value: 'commands overview', inline: true },
+            { name: '\u200B', value: '\u200B', inline: false },
+            { name: '**-> +help**', value: "shows a list of all available commands", inline: false},
+            { name: '**-> +play**', value: "Play music from youtube! use links or search arguments", inline: false},
+            { name: '**-> +stop**', value: "Stop playing music and disconnect the bot from the voice channel", inline: false}
+
         )
+        
         .setThumbnail("https://cdn.discordapp.com/attachments/964616970681085992/964671869116616785/unknown.png")
     },
 

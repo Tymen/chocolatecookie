@@ -1,5 +1,5 @@
 {
-  "name": "loyalty-bot",
+  "name": "chocolatecookie",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -12,6 +12,7 @@
   "dependencies": {
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
+    "ffmpeg-static": "^4.4.1",
     "nodemon": "^2.0.4",
     "opusscript": "^0.0.6",
     "ytdl-core": "^4.11.0"
