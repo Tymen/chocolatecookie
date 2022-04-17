@@ -39,6 +39,8 @@ const EventResponse = (message, client, servers) => {
             case 'stop':
                 music.stop(message);
                 break;
+            case 'skip':
+                music.skip(message, servers);
 
         }
     }
