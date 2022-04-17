@@ -10,9 +10,11 @@ const prefix = process.env.COMMAND_PREFIX;
 const reply = (message, value) => {
     return message.channel.send(value)
 }
-
+const replyEmbed = (message, value) => {
+    return message.channel.send({ embeds: [value] })
+}
 // <=========> Command Handler <=========> //
-const EventResponse = (message, client) => {
+const EventResponse = (message, client, servers) => {
     if (!message.author.bot && message.content.startsWith(prefix)){
 
         const args = message.content.slice(prefix.length).trim().split(' ');
@@ -20,13 +22,19 @@ const EventResponse = (message, client) => {
 
         switch(command) {
             case 'welcome':
-                reply(message, customMessage.welcomeMessage(message.author, client));
+                replyEmbed(message, customMessage.welcomeMessage(message.author, client));
                 break;
             case 'help':
-                reply(message, customMessage.help())
+                replyEmbed(message, customMessage.help())
                 break;
             case 'play':
-                music.playMusic(message, args);
+                music.playMusic(message, args, servers);
+                break;
+            case 'pause':
+                music.pause();
+                break;
+            case 'unpause':
+                music.unpause();
                 break;
             case 'stop':
                 music.stop(message);

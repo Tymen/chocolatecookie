@@ -12,7 +12,7 @@ let getMemberCount = (client) => {
 
 // Define Variables
 const defaultColor = '#0099ff'
-const defaultAuthor = 'chocolatecookie'
+const defaultAuthor = { name: 'Some name' };
 
 // Custom messages
 const customMessage = {
@@ -37,7 +37,6 @@ const customMessage = {
         return new Discord.MessageEmbed()
         .setColor(defaultColor)
         .setTitle('chocolatecookie command list')
-        .setAuthor('\u200B')
         .addFields(
             { name: '\u200B', value: '\u200B', inline: false },
             { name: '**-> +help**', value: "shows a list of all available commands", inline: false},

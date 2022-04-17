@@ -1,21 +1,23 @@
 // <=========> Play command <=========> //
+const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require('@discordjs/voice');
 
-var servers = {};
+const play = (message, args, ytdl, servers, player) => {
+    let playMusic = (voiceConnection, message) => {
 
-const play = (message, args, ytdl) => {
 
-    let playMusic = (connection) => {
+        let connection = voiceConnection(message.guild.id);
         let server = servers[message.guild.id];
-        
-        server.dispatcher = connection.play(ytdl(server.queue[0], {filter: "audioonly"}))
 
+        const resource = createAudioResource(ytdl(server.queue[0], {filter: "audioonly"}));
+        player.play(resource);
+        server.dispatcher = connection.subscribe(player);
+        console.log(server.queue)
         server.queue.shift();
-
-        server.dispatcher.on("end", function() {
+        player.on("idle", function() {
             if(server.queue[0]){
-                play(connection, message);
+                playMusic(getVoiceConnection, message);
             }else {
-                connection.disconnect();
+                connection.destroy();
             }
         })
     }
@@ -33,12 +35,19 @@ const play = (message, args, ytdl) => {
     };
     
     var server = servers[message.guild.id];
-
     server.queue.push(args[0]);
 
-    if(!message.guild.voiceConnection) message.member.voice.channel.join().then(function(connection){
-        playMusic(connection, message);
-    })
+    message.reply("Added song to queue!");
+
+    if(!getVoiceConnection(message.guild.id)) {
+        joinVoiceChannel({
+            channelId: message.member.voice.channel.id,
+            guildId: message.guild.id,
+            adapterCreator: message.guild.voiceAdapterCreator
+        })
+        playMusic(getVoiceConnection, message);
+    }
+    
 }
 
 module.exports = { play }

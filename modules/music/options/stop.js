@@ -1,5 +1,8 @@
 // <=========> Stop command <=========> //
+const { getVoiceConnection } = require('@discordjs/voice');
+
 const stop = (message) => {
-    if(!message.guild.voiceConnection) message.member.voice.channel.leave();
+    connection = getVoiceConnection(message.guild.id);
+    if(connection) connection.destroy();
 }
 module.exports = { stop };

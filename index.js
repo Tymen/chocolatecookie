@@ -1,8 +1,17 @@
 // <=========> Define Variables, Modules <=========> //
 
 // Discord imports
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, Intents } = require('discord.js');
+const client = new Client({ intents: [
+    Intents.FLAGS.GUILDS, 
+    Intents.FLAGS.GUILD_MEMBERS, 
+    Intents.FLAGS.GUILD_INTEGRATIONS,
+    Intents.FLAGS.GUILD_VOICE_STATES,
+    Intents.FLAGS.GUILD_PRESENCES,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+    Intents.FLAGS.GUILD_MESSAGE_TYPING,
+]});
 
 // Module imports
 require('dotenv').config();
@@ -11,7 +20,7 @@ const { EventResponse } = require('./modules/commands')
 // Define Variable
 const { customMessage } = require('./modules/customMessage')
 const welcome = client.channels.cache.get('764855446938189836')
-
+var servers = {};
 // <=========> Status Message <=========> //
 
 client.once('ready', () => {
@@ -28,8 +37,8 @@ client.once('ready', () => {
 
 // <=========> Listen for messages <=========> //
 
-client.on('message', message => {
-    EventResponse(message, client);
+client.on('messageCreate', message => {
+    EventResponse(message, client, servers);
 })
 
 client.on('guildMemberAdd', member => {
