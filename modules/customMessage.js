@@ -3,12 +3,9 @@
 // Discord Module
 const Discord = require('discord.js');
 
-// ytdl
-
 let getMemberCount = (client) => {
     return client.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
  };
-
 
 // Define Variables
 const defaultColor = '#0099ff'
@@ -37,31 +34,17 @@ const customMessage = {
         return new Discord.MessageEmbed()
         .setColor(defaultColor)
         .setTitle('chocolatecookie command list')
+        .setAuthor('\u200B')
         .addFields(
             { name: '\u200B', value: '\u200B', inline: false },
             { name: '**-> +help**', value: "shows a list of all available commands", inline: false},
             { name: '**-> +play**', value: "Play music from youtube! use links or search arguments", inline: false},
-            { name: '**-> +stop**', value: "Stop playing music and disconnect the bot from the voice channel", inline: false}
-
+            { name: '**-> +stop**', value: "Stop playing music and disconnect the bot from the voice channel", inline: false},
+            { name: '**-> +pause**', value: "Pause the music", inline: false},
+            { name: '**-> +unpause**', value: "unpause the music", inline: false}
         )
         
         .setThumbnail("https://cdn.discordapp.com/attachments/964616970681085992/964671869116616785/unknown.png")
-    },
-
-    pannenkoek: () => {
-        return new Discord.MessageEmbed()
-        .setColor(defaultColor)
-        .setTitle('Anouk is de enige echte pannenkoek')
-        .setAuthor(defaultAuthor)
-        .setThumbnail("https://cdn.discordapp.com/attachments/430655027284148225/764628105783803924/Z.png")
-    },
-
-    muntrix: () => {
-        return new Discord.MessageEmbed()
-        .setColor(defaultColor)
-        .setTitle('"Geef me smoochie op me eikel dan!" ~ Muntrix')
-        .setAuthor(defaultAuthor)
-        .setThumbnail("https://cdn.discordapp.com/attachments/430655027284148225/764631803671085136/women-love-huge-balls.png")
     },
 }
 

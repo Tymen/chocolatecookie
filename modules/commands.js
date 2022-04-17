@@ -13,6 +13,7 @@ const reply = (message, value) => {
 const replyEmbed = (message, value) => {
     return message.channel.send({ embeds: [value] })
 }
+
 // <=========> Command Handler <=========> //
 const EventResponse = (message, client, servers) => {
     if (!message.author.bot && message.content.startsWith(prefix)){
