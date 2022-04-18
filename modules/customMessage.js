@@ -34,7 +34,7 @@ const customMessage = {
         return new Discord.MessageEmbed()
         .setColor(defaultColor)
         .setTitle('chocolatecookie command list')
-        .setAuthor('\u200B')
+        .setAuthor({name: '\u200B'})
         .addFields(
             { name: '\u200B', value: '\u200B', inline: false },
             { name: '**-> +help**', value: "shows a list of all available commands", inline: false},

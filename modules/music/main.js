@@ -26,8 +26,8 @@ const music = {
     unpause: () => {
         unpause(player);
     },
-    stop: (message) => {
-        stop(message);
+    stop: (message, servers) => {
+        stop(message, servers);
     },
     skip: (message, servers) => {
         play(message, ytdl, servers, player, true);

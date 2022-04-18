@@ -38,7 +38,7 @@ const EventResponse = (message, client, servers) => {
                 music.unpause();
                 break;
             case 'stop':
-                music.stop(message);
+                music.stop(message, servers);
                 break;
             case 'skip':
                 music.skip(message, servers);
