@@ -1,5 +1,6 @@
 // <=========> Play command <=========> //
 const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require('@discordjs/voice');
+const { customMessage } = require('../../customMessage')
 
 const play = async (message, ytdl, servers, player, skip) => {
     let playMusic = async (voiceConnection, message) => {
@@ -26,15 +27,34 @@ const play = async (message, ytdl, servers, player, skip) => {
             }
         })
     }
-    if(!getVoiceConnection(message.guild.id)) {
+    if(!getVoiceConnection(message.guild.id) && !skip) {
         joinVoiceChannel({
             channelId: message.member.voice.channel.id,
             guildId: message.guild.id,
             adapterCreator: message.guild.voiceAdapterCreator
         })
-    }
-    if (skip || (getVoiceConnection(message.guild.id) && skip == false)) {
         playMusic(getVoiceConnection, message);
+    }
+    if (skip) {
+        if (getVoiceConnection(message.guild.id)) {
+            if(servers[message.guild.id]?.queue?.length > 0) {
+                getQueue = servers[message.guild.id].queue;
+                getQueue.shift();
+                if (getQueue.length > 0) {
+                    customMessage.tempMessage(message, "Now playing: " + getQueue[0].title, 5)
+                    playMusic(getVoiceConnection, message);
+                } else {
+                    customMessage.tempMessage(message, "The queue is empty!", 5)
+                    message.channel.send("The queue is empty!")
+                    getVoiceConnection(message.guild.id).destroy();
+                }
+            }else {
+                customMessage.tempMessage(message, "The queue is empty!", 5)
+                getVoiceConnection(message.guild.id).destroy();
+            }
+        } else {
+            message.channel.send("chocolatecookie is not in a voice channel!")
+        }
     }
 }
 

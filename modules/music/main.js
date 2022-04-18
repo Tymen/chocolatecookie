@@ -7,7 +7,6 @@ const { stop } = require('./options/stop');
 const { pause } = require('./options/pause');
 const { unpause } = require('./options/unpause');
 const { queue } = require('./options/queue');
-const { skip } = require('./options/skip');
 
 const player = createAudioPlayer({
     behaviors: {
@@ -31,8 +30,10 @@ const music = {
         stop(message);
     },
     skip: (message, servers) => {
-        servers[message.guild.id].queue.shift();
         play(message, ytdl, servers, player, true);
+    },
+    getQueue: (q) => {
+        return queue.getQueue(q);
     }
 }
 

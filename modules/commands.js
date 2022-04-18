@@ -28,7 +28,7 @@ const EventResponse = (message, client, servers) => {
             case 'help':
                 replyEmbed(message, customMessage.help())
                 break;
-            case 'play':
+            case 'play': case 'p':
                 music.playMusic(message, args, servers);
                 break;
             case 'pause':
@@ -42,7 +42,10 @@ const EventResponse = (message, client, servers) => {
                 break;
             case 'skip':
                 music.skip(message, servers);
-
+                break;
+            case 'queue': case 'q': 
+                replyEmbed(message, music.getQueue(servers[message.guild.id].queue));
+                break;
         }
     }
 

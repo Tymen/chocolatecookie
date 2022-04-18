@@ -38,7 +38,8 @@ const customMessage = {
         .addFields(
             { name: '\u200B', value: '\u200B', inline: false },
             { name: '**-> +help**', value: "shows a list of all available commands", inline: false},
-            { name: '**-> +play**', value: "Play music from youtube! use links or search arguments", inline: false},
+            { name: '**-> +play | +p**', value: "Play music from youtube! use links or search arguments", inline: false},
+            { name: '**-> +queue | +q**', value: "A list with the current songs in the queue", inline: false},
             { name: '**-> +stop**', value: "Stop playing music and disconnect the bot from the voice channel", inline: false},
             { name: '**-> +pause**', value: "Pause the music", inline: false},
             { name: '**-> +unpause**', value: "unpause the music", inline: false}
@@ -46,6 +47,27 @@ const customMessage = {
         
         .setThumbnail("https://cdn.discordapp.com/attachments/964616970681085992/964671869116616785/unknown.png")
     },
+    tempMessage: (message, value, delay) => {
+        message.channel.send(value).then( msg => {
+            setTimeout( () => {
+                msg.delete();
+            }, delay * 1000);
+        })
+    },
+    queue: (queue) => {
+        let embed = new Discord.MessageEmbed();
+        embed.setColor(defaultColor)
+        embed.setTitle('chocolatecookie music queue')
+        embed.setAuthor({name:'\u200B'})
+        embed.setThumbnail("https://cdn.discordapp.com/attachments/964616970681085992/964671869116616785/unknown.png")
+        embed.addField('\u200B', '\u200B', false);
+        for (i = 0; i < queue.length; i++) {
+            embed.addField(`${i + 1}: ${queue[i].title}`,'\u200B', false);
+        }
+        console.log(queue)
+
+        return embed;
+    }
 }
 
 module.exports = { customMessage }
