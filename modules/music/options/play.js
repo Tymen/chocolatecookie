@@ -17,9 +17,9 @@ const play = async (message, ytdl, servers, player, skip) => {
         connection.subscribe(player)
         player.play(resource);
         server.dispatcher = connection.subscribe(player);
-        // console.log(server.queue)
+
         player.on("idle", function() {
-            if(server.queue[0]?.url){
+            if(server.queue[0]?.url && server.queue > 0){
                 server.queue.shift();
                 playMusic(getVoiceConnection, message);
             }else {
