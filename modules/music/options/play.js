@@ -1,4 +1,6 @@
 // <=========> Play command <=========> //
+
+// Import discord voice and customMessage module
 const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require('@discordjs/voice');
 const { customMessage } = require('../../customMessage')
 

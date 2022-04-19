@@ -1,4 +1,4 @@
-// <=========> Stop command <=========> //
+// <=========> Pause command <=========> //
 const pause = (player) => {
     player.pause();  
 }

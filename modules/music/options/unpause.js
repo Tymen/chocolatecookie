@@ -1,4 +1,4 @@
-// <=========> Stop command <=========> //
+// <=========> Unpause command <=========> //
 const unpause = (player) => {
     player.unpause();
 }

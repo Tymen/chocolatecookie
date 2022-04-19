@@ -1,6 +1,7 @@
 // <=========> Module imports <=========> //
 const ytdl = require('play-dl')
 const { createAudioPlayer, NoSubscriberBehavior } = require('@discordjs/voice');
+
 // <=========> Command imports <=========> //
 const { play } = require('./options/play');
 const { stop } = require('./options/stop');

@@ -1,3 +1,6 @@
+// <=========> Play command <=========> //
+
+// Import custom message module
 const { customMessage } = require('../../customMessage')
 
 const queue = {
