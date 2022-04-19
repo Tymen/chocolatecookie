@@ -64,7 +64,6 @@ const customMessage = {
         for (i = 0; i < queue.length; i++) {
             embed.addField(`${i + 1}: ${queue[i].title}`,'\u200B', false);
         }
-        console.log(queue)
 
         return embed;
     }
