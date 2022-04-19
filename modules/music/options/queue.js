@@ -17,7 +17,7 @@ const queue = {
             queue: []
         };
 
-        if (args[0] && !message.member.voice.channel) {
+        if (args[0] && message.member.voice.channel) {
             var server = servers[message.guild.id];
             let yt_info = await ytdl.search(args.join(" "), { source : { youtube : "video" } })
             musicCache = {

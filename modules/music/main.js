@@ -19,7 +19,9 @@ const player = createAudioPlayer({
 const music = {
     playMusic: async (message, args, servers) => {
         await queue.addQueue(message, args, ytdl, servers)
-        play(message, ytdl, servers, player, false);
+        if (message.member.voice.channel) {
+            play(message, ytdl, servers, player, false);
+        }
     },
     pause: () => {
         pause(player);
