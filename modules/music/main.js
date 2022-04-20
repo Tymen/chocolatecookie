@@ -18,9 +18,9 @@ const player = createAudioPlayer({
 // <=========> Music Commands <=========> //
 const music = {
     playMusic: async (message, args, servers) => {
-        await queue.addQueue(message, args, ytdl, servers)
+        await queue.addQueue(message, args, ytdl, servers, {fistInQueue: false})
         if (message.member.voice.channel) {
-            play(message, ytdl, servers, player, false);
+            play(message, ytdl, servers, player, {skip: false, forcePlay: false});
         }
     },
     pause: () => {
@@ -33,10 +33,14 @@ const music = {
         stop(message, servers);
     },
     skip: (message, servers) => {
-        play(message, ytdl, servers, player, true);
+        play(message, ytdl, servers, player, {skip: true, forcePlay: false});
     },
     getQueue: (q) => {
         return queue.getQueue(q);
+    },
+    forcePlay: async (message, args, servers) => {
+        await queue.addQueue(message, args, ytdl, servers, {firstInQueue: true});
+        play(message, ytdl, servers, player, {skip: false, forcePlay: true});
     }
 }
 

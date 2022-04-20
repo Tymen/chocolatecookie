@@ -4,7 +4,7 @@
 const { customMessage } = require('../../customMessage')
 
 const queue = {
-    addQueue: async (message, args, ytdl, servers) => {
+    addQueue: async (message, args, ytdl, servers, option) => {
         if (!args[0]) {
             customMessage.tempMessage(message, "Provide a search argument or a link!", 5);
         }
@@ -24,13 +24,18 @@ const queue = {
                 title: `${ yt_info[0].title } (${ yt_info[0].durationRaw }) | ${ yt_info[0].channel.name }`,
                 url: yt_info[0].url
             }
-            server.queue.push(musicCache);
-        
-            await customMessage.tempMessage(message, `Added ${musicCache.title} to the queue`, 5);
+
+            if (option.firstInQueue == true) {
+                server.queue.unshift(musicCache);
+            } else {
+                server.queue.push(musicCache);
+                await customMessage.tempMessage(message, `Added ${musicCache.title} to the queue`, 5);
+            }
+            
         }
     },
     getQueue: (queue) => {
         return customMessage.queue(queue);
-    }
+    },
 }
 module.exports = { queue };

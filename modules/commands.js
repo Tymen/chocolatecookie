@@ -31,6 +31,9 @@ const EventResponse = (message, client, servers) => {
             case 'play': case 'p':
                 music.playMusic(message, args, servers);
                 break;
+            case 'forceplay': case 'fplay': 
+                music.forcePlay(message, args, servers);
+                break;
             case 'pause':
                 music.pause();
                 break;
@@ -44,7 +47,11 @@ const EventResponse = (message, client, servers) => {
                 music.skip(message, servers);
                 break;
             case 'queue': case 'q': 
-                replyEmbed(message, music.getQueue(servers[message.guild.id].queue));
+                if (servers[message.guild.id]) {
+                    replyEmbed(message, music.getQueue(servers[message.guild.id]?.queue));
+                } else {
+                    customMessage.tempMessage(message, "There are no songs in the queue", 5)
+                }
                 break;
         }
     }

@@ -4,7 +4,7 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require('@discordjs/voice');
 const { customMessage } = require('../../customMessage')
 
-const play = async (message, ytdl, servers, player, skip) => {
+const play = async (message, ytdl, servers, player, option) => {
     let playMusic = async (voiceConnection, message) => {
 
         /* Define basic variables
@@ -28,13 +28,15 @@ const play = async (message, ytdl, servers, player, skip) => {
         // Play the audioplayer on the discord bot
         connection.subscribe(player)
 
-        player.play(resource); // Might be unnecessary will need to check this
         server.dispatcher = connection.subscribe(player);
 
         // If the player is on idle it will queue the next song if it exists
+
+        // There is a bug with the queue in combination with forceplay i will need to fix this
         player.on("idle", function() {
-            if(server.queue[0]?.url && server.queue > 0){
+            if(server.queue[0].url){
                 server.queue.shift();
+                console.log(server.queue);
                 playMusic(getVoiceConnection, message);
             }else {
                 connection.destroy();
@@ -43,7 +45,7 @@ const play = async (message, ytdl, servers, player, skip) => {
     }
 
     // If the bot isn't connected to a voice channel it will join the voice channel fr
-    if(!getVoiceConnection(message.guild.id) && !skip) {
+    if(!getVoiceConnection(message.guild.id) && !option.skip) {
         joinVoiceChannel({
             channelId: message.member.voice.channel.id,
             guildId: message.guild.id,
@@ -53,11 +55,13 @@ const play = async (message, ytdl, servers, player, skip) => {
     }
 
     // If the skip variable is on true it will check if the bot is connected and then it will play the next song
-    if (skip) {
+    if (option.skip || option.forcePlay) {
         if (getVoiceConnection(message.guild.id)) {
             if(servers[message.guild.id]?.queue?.length > 0) {
                 getQueue = servers[message.guild.id].queue;
-                getQueue.shift();
+                if(option.skip){
+                    getQueue.shift();
+                }
                 if (getQueue.length > 0) {
                     customMessage.tempMessage(message, "Now playing: " + getQueue[0].title, 5)
                     playMusic(getVoiceConnection, message);

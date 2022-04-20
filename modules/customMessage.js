@@ -39,6 +39,7 @@ const customMessage = {
             { name: '\u200B', value: '\u200B', inline: false },
             { name: '**-> +help**', value: "shows a list of all available commands", inline: false},
             { name: '**-> +play | +p**', value: "Play music from youtube! use links or search arguments", inline: false},
+            { name: '**-> +forceplay | +fplay**', value: "Force play a song!", inline: false},
             { name: '**-> +queue | +q**', value: "A list with the current songs in the queue", inline: false},
             { name: '**-> +stop**', value: "Stop playing music and disconnect the bot from the voice channel", inline: false},
             { name: '**-> +pause**', value: "Pause the music", inline: false},
