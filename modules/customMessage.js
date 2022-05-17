@@ -9,14 +9,14 @@ let getMemberCount = (client) => {
 
 // Define Variables
 const defaultColor = '#0099ff'
-const defaultAuthor = { name: 'Some name' };
+const defaultAuthor = { name: 'ShadowRaven :)' };
 
 // Custom messages
 const customMessage = {
     welcomeMessage: (Author, client) => {
         return new Discord.MessageEmbed()
         .setColor(defaultColor)
-        .setTitle(Author.username + ", chocolatecookie")
+        .setTitle("Welcome to server, " + Author.username)
         .setAuthor(defaultAuthor)
         .setDescription("Don't forget to read the rules")
         .setDescription("You're member: " + getMemberCount(client))
