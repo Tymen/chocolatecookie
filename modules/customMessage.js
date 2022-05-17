@@ -16,7 +16,7 @@ const customMessage = {
     welcomeMessage: (Author, client) => {
         return new Discord.MessageEmbed()
         .setColor(defaultColor)
-        .setTitle("Welcome to server, " + Author.username)
+        .setTitle("Welcome to the server, " + Author.username)
         .setAuthor(defaultAuthor)
         .setDescription("Don't forget to read the rules")
         .setDescription("You're member: " + getMemberCount(client))
