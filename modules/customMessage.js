@@ -43,7 +43,8 @@ const customMessage = {
             { name: '**-> +queue | +q**', value: "A list with the current songs in the queue", inline: false},
             { name: '**-> +stop**', value: "Stop playing music and disconnect the bot from the voice channel", inline: false},
             { name: '**-> +pause**', value: "Pause the music", inline: false},
-            { name: '**-> +unpause**', value: "unpause the music", inline: false}
+            { name: '**-> +unpause**', value: "unpause the music", inline: false},
+            { name: '**-> +test**', value: "test", inline: false}
         )
         
         .setThumbnail("https://cdn.discordapp.com/attachments/964616970681085992/964671869116616785/unknown.png")
